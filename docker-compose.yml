@@ -16,6 +16,9 @@ services:
   backend:
     build:
       context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
     depends_on:
       - db
     environment:
@@ -36,7 +39,10 @@ services:
     depends_on:
       - backend
     ports:
-      - "5174:5174"
+      - "5173:5173"
+    volumes:
+    - ./frontend:/app
+    working_dir: /app
     environment:
       ROLLUP_USE_NODE_BUILTINS: "true"
     platform: linux/amd64
